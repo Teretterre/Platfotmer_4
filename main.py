@@ -4,6 +4,7 @@ from player import Player
 from camera import Camera
 from enemy import Enemy
 from health import Health
+from gameObject import GameObject
 import const
 
 # Инициализация Pygame
@@ -43,6 +44,8 @@ def main():
         Enemy(1500, const.SCREEN_HEIGHT - 70, 30, 1)
     ]
 
+    Rock = GameObject(400, const.SCREEN_HEIGHT - 600,)
+
     hp = Health()
 
     camera = Camera(const.SCREEN_WIDTH, const.SCREEN_HEIGHT)
@@ -54,6 +57,7 @@ def main():
     enemys_sprites = pygame.sprite.Group()
     for ene in enemys:
         enemys_sprites.add(ene)
+        all_sprites.add(Rock)
 
     running = True
     while running:
