@@ -53,7 +53,7 @@ class Player(pygame.sprite.Sprite):
             self.image = self.walk_l_imgs[int(self.current_img)]
 
 
-    def check_collision(self, platforms):
+    def check_collision(self, platforms, gameObjects):
         # Проверка горизонтальных колизий
         self.rect.x += self.velocity_x
         collisions = pygame.sprite.spritecollide(self, platforms, False)
@@ -72,4 +72,13 @@ class Player(pygame.sprite.Sprite):
                 self.on_ground = True
             elif self.velocity_y < 0:
                 self.rect.top = platform.rect.bottom
+            self.velocity_y = 0
+
+        collisions = pygame.sprite.spritecollide(self, gameObjects,False)
+        for object in collisions:
+            if self.velocity_y > 0:
+                self.rect.bottom = object.rect.top
+                self.on_ground = True
+            elif self.velocity_y < 0:
+                self.rect.top = object.rect.bottom
             self.velocity_y = 0

@@ -44,7 +44,7 @@ def main():
         Enemy(1500, const.SCREEN_HEIGHT - 70, 30, 1)
     ]
 
-    Rock = GameObject(400, const.SCREEN_HEIGHT - 600,)
+    Boxes = [GameObject(400, const.SCREEN_HEIGHT - 600, object_type='box')]
 
     hp = Health()
 
@@ -57,7 +57,8 @@ def main():
     enemys_sprites = pygame.sprite.Group()
     for ene in enemys:
         enemys_sprites.add(ene)
-        all_sprites.add(Rock)
+    for obj in Boxes:
+        enemys_sprites.add(Boxes)
 
     running = True
     while running:
@@ -71,14 +72,15 @@ def main():
         camera.update(player)
 
         # Проверка коллизий
-        player.check_collision(platforms)
+        player.check_collision(platforms, Boxes)
         enemy_collisions = pygame.sprite.spritecollide(player, enemys_sprites, True)
 
         if enemy_collisions:
             hp.lose_hp()
             if hp.hp == 0:
                 reset_game(hp)
-            
+        for obj in Boxes:
+            obj.collide_player(player)
 
 
         # Рендеринг
