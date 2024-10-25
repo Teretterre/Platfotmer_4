@@ -1,10 +1,13 @@
 import pygame
+
+from Bullet import Bullet
 from platform import Platform
 from player import Player
 from camera import Camera
 from enemy import Enemy
 from health import Health
 from gameObject import GameObject
+from Bullet import Bullet
 import const
 
 # Инициализация Pygame
@@ -23,6 +26,7 @@ def reset_game(hp):
 # Игровой цикл
 def main():
     player = Player(500, const.SCREEN_HEIGHT - 100)
+    bullet = Bullet()
     platforms = [
         Platform(0, const.SCREEN_HEIGHT - 30, const.LEVEL_LENGTH, 30),
         Platform(400, 500, 150, 20),

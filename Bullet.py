@@ -10,9 +10,9 @@ class Bullet(pygame.sprite.Sprite):
             pygame.transform.scale(pygame.image.load("img/bullet_3.png.png"), [const.BULLET_WIDTH, const.BULLET_HEIGHT])
         ]
         self.bullet_l_imgs = [
-            pygame.transform.scale(pygame.image.load("img/bullet_1.png.png"),[const.BULLET_WIDTH, const.BULLET_HEIGHT]),
-            pygame.transform.scale(pygame.image.load("img/bullet_2.png.png"),[const.BULLET_WIDTH, const.BULLET_HEIGHT]),
-            pygame.transform.scale(pygame.image.load("img/bullet_3.png.png"), [const.BULLET_WIDTH, const.BULLET_HEIGHT])
+            pygame.transform.scale(pygame.image.load("img/bullet_1L.png.png"),[const.BULLET_WIDTH, const.BULLET_HEIGHT]),
+            pygame.transform.scale(pygame.image.load("img/bullet_2L.png.png"),[const.BULLET_WIDTH, const.BULLET_HEIGHT]),
+            pygame.transform.scale(pygame.image.load("img/bullet_3L.png.png"), [const.BULLET_WIDTH, const.BULLET_HEIGHT])
         ]
         self.current_img = 0
         if direction > 0:
