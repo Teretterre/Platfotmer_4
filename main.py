@@ -26,7 +26,7 @@ def reset_game(hp):
 # Игровой цикл
 def main():
     player = Player(500, const.SCREEN_HEIGHT - 100)
-    bullet = Bullet()
+
     platforms = [
         Platform(0, const.SCREEN_HEIGHT - 30, const.LEVEL_LENGTH, 30),
         Platform(400, 500, 150, 20),
@@ -63,6 +63,9 @@ def main():
         enemys_sprites.add(ene)
     for obj in Boxes:
         enemys_sprites.add(Boxes)
+    for bull in player.bullets:
+        all_sprites.add(bull)
+
 
     running = True
     while running:
@@ -86,6 +89,9 @@ def main():
         for obj in Boxes:
             obj.collide_player(player)
 
+        for sprite in all_sprites:
+            if isinstance(sprite, Bullet) :
+                sprite.check_collision(enemys, all_sprites)
 
         # Рендеринг
         screen.fill(const.WHITE)

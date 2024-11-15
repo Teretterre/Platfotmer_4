@@ -1,5 +1,7 @@
 import pygame
 import const
+from Bullet import Bullet
+import time
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -23,6 +25,9 @@ class Player(pygame.sprite.Sprite):
         self.velocity_y = 0
         self.velocity_x = 0
         self.on_ground = False
+        self.bullets = []
+        self.direction = 1
+        self.last_time_shoot = time.time()
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -30,12 +35,19 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_LEFT]:
             self.current_img += 0.1
             self.velocity_x -= const.PLAYER_SPEED
+            self.direction = -1
         if keys[pygame.K_RIGHT]:
             self.current_img += 0.1
             self.velocity_x += const.PLAYER_SPEED
+            self.direction = 1
         if keys[pygame.K_SPACE] and self.on_ground:
             self.velocity_y = -const.JUMP_STRENGTH
             self.on_ground = False
+        if keys[pygame.K_RCTRL] and time.time() - self.last_time_shoot > const.BULLET_DELAY:
+            self.bullets.append(Bullet(self.rect.x, self.rect.y, self.direction))
+            self.last_time_shoot = time.time()
+            print('снаряд был создан')
+            print(self.bullets)
 
         self.velocity_y += const.GRAVITY
 
