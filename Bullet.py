@@ -50,6 +50,7 @@ class Bullet(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self, enemy, True)
         for sprite in sprites:
             if isinstance(sprite, Platform) or isinstance(sprite, GameObject):
-                collisions = pygame.sprite.spritecollide(self, sprite, True)
+                if pygame.sprite.collide_rect(self, sprite):
+                    self.kill()
             if collisions:
                 self.kill()

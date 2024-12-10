@@ -1,3 +1,5 @@
+from random import random
+import random
 import pygame
 
 from Bullet import Bullet
@@ -9,6 +11,9 @@ from health import Health
 from gameObject import GameObject
 from Bullet import Bullet
 import const
+from background import draw_back_gradient, Cloud
+
+
 
 # Инициализация Pygame
 pygame.init()
@@ -50,6 +55,7 @@ def main():
 
     Boxes = [GameObject(400, const.SCREEN_HEIGHT - 600, object_type='box')]
 
+
     hp = Health()
 
     camera = Camera(const.SCREEN_WIDTH, const.SCREEN_HEIGHT)
@@ -62,10 +68,14 @@ def main():
     for ene in enemys:
         enemys_sprites.add(ene)
     for obj in Boxes:
-        enemys_sprites.add(Boxes)
+        all_sprites.add(Boxes)
     for bull in player.bullets:
         all_sprites.add(bull)
 
+    cloud_spites = pygame.sprite.Group()
+    for i in range(20):
+        cloud = Cloud(random.randint(0, const.LEVEL_LENGTH), random.randint(40,200), random.randint(100,200), 50)
+        cloud_spites.add(cloud)
 
     running = True
     while running:
@@ -73,10 +83,14 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+        for bull in player.bullets:
+            all_sprites.add(bull)
+
         # Обновление всех спрайтов
         all_sprites.update()
         enemys_sprites.update()
         camera.update(player)
+        cloud_spites.update()
 
         # Проверка коллизий
         player.check_collision(platforms, Boxes)
@@ -91,14 +105,17 @@ def main():
 
         for sprite in all_sprites:
             if isinstance(sprite, Bullet) :
-                sprite.check_collision(enemys, all_sprites)
+                sprite.check_collision(enemys_sprites, all_sprites)
 
         # Рендеринг
-        screen.fill(const.WHITE)
+        draw_back_gradient(screen, (135, 180, 200), (0, 191, 255))
         for sprite in all_sprites:
             screen.blit(sprite.image, camera.apply(sprite))
         for sprite in enemys_sprites:
             screen.blit(sprite.image, camera.apply(sprite))
+        for sprite in cloud_spites:
+            screen.blit(sprite.image, camera.apply(sprite))
+
         hp.draw(screen)
         pygame.display.flip()
 

@@ -44,10 +44,9 @@ class Player(pygame.sprite.Sprite):
             self.velocity_y = -const.JUMP_STRENGTH
             self.on_ground = False
         if keys[pygame.K_RCTRL] and time.time() - self.last_time_shoot > const.BULLET_DELAY:
-            self.bullets.append(Bullet(self.rect.x, self.rect.y, self.direction))
+            self.bullets.append(Bullet(self.rect.center[0], self.rect.center[1], self.direction))
             self.last_time_shoot = time.time()
-            print('снаряд был создан')
-            print(self.bullets)
+
 
         self.velocity_y += const.GRAVITY
 
