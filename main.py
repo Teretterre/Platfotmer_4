@@ -34,7 +34,7 @@ def main():
     Boxes = [GameObject(400, const.SCREEN_HEIGHT - 600, object_type='box')]
 
 
-    hp = Health()
+
 
     camera = Camera(const.SCREEN_WIDTH, const.SCREEN_HEIGHT)
 
