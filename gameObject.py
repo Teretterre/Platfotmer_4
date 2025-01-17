@@ -31,10 +31,11 @@ class GameObject(pygame.sprite.Sprite):
             self.rect.x += dx
 
     def collide_player(self, player):
+        player.can_jump = True
         if self.rect.colliderect(player.rect):
             if player.velocity_x != 0:
                 self.move(player.velocity_x)
-
+                player.can_jump = False
 
     def update(self):
         self.gravity()

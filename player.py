@@ -28,6 +28,8 @@ class Player(pygame.sprite.Sprite):
         self.bullets = []
         self.direction = 1
         self.last_time_shoot = time.time()
+        self.can_jump = True
+
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -40,7 +42,7 @@ class Player(pygame.sprite.Sprite):
             self.current_img += 0.1
             self.velocity_x += const.PLAYER_SPEED
             self.direction = 1
-        if keys[pygame.K_SPACE] and self.on_ground:
+        if keys[pygame.K_SPACE] and self.on_ground and self.can_jump:
             self.velocity_y = -const.JUMP_STRENGTH
             self.on_ground = False
         if keys[pygame.K_RCTRL] and time.time() - self.last_time_shoot > const.BULLET_DELAY:
