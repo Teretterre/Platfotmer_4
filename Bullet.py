@@ -1,7 +1,7 @@
 import  pygame
 import  const
 from gameObject import GameObject
-from platform import Platform
+from my_platform import Platform
 
 
 class Bullet(pygame.sprite.Sprite):

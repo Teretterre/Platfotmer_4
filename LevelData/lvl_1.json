@@ -1,7 +1,7 @@
 {
   "level" : 1,
   "level_size" : 1500,
-  "player_start" : {
+  "player-start" : {
     "x" : 500,
     "y" : 500
   },

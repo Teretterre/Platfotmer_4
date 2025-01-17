@@ -1,9 +1,9 @@
 from random import random
 import random
 import pygame
-
+from level import Level
 from Bullet import Bullet
-from platform import Platform
+from my_platform import Platform
 from player import Player
 from camera import Camera
 from enemy import Enemy
@@ -30,29 +30,7 @@ def reset_game(hp):
 
 # Игровой цикл
 def main():
-    player = Player(500, const.SCREEN_HEIGHT - 100)
-
-    platforms = [
-        Platform(0, const.SCREEN_HEIGHT - 30, const.LEVEL_LENGTH, 30),
-        Platform(400, 500, 150, 20),
-        Platform(600, 400, 150, 20),
-        Platform(900, 300, 150, 20),
-        Platform(1300, 450, 150, 20),
-        Platform(1600, 350, 150, 20),
-        Platform(2000, 300, 150, 20),
-        Platform(2500, 450, 150, 20),
-        Platform(3000, 500, 150, 20),
-        Platform(3200, 400, 150, 20),
-        Platform(3400, 300, 150, 20),
-        Platform(3700, 200, 150, 20),
-        Platform(3900, 100, 150, 20),
-    ]
-    enemys = [
-        Enemy(700, const.SCREEN_HEIGHT - 70, 50, 1),
-        Enemy(1000, const.SCREEN_HEIGHT - 70, 150),
-        Enemy(1500, const.SCREEN_HEIGHT - 70, 30, 1)
-    ]
-
+    l1 = Level('LevelData/lvl_1.json')
     Boxes = [GameObject(400, const.SCREEN_HEIGHT - 600, object_type='box')]
 
 
