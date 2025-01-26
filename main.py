@@ -31,29 +31,6 @@ def reset_game(hp):
 # Игровой цикл
 def main():
     l1 = Level('LevelData/lvl_1.json')
-    Boxes = [GameObject(400, const.SCREEN_HEIGHT - 600, object_type='box')]
-
-
-
-
-    camera = Camera(const.SCREEN_WIDTH, const.SCREEN_HEIGHT)
-
-    all_sprites = pygame.sprite.Group()
-    for plat in platforms:
-        all_sprites.add(plat)
-    all_sprites.add(player)
-    enemys_sprites = pygame.sprite.Group()
-    for ene in enemys:
-        enemys_sprites.add(ene)
-    for obj in Boxes:
-        all_sprites.add(Boxes)
-    for bull in player.bullets:
-        all_sprites.add(bull)
-
-    cloud_spites = pygame.sprite.Group()
-    for i in range(20):
-        cloud = Cloud(random.randint(0, const.LEVEL_LENGTH), random.randint(40,200), random.randint(100,200), 50)
-        cloud_spites.add(cloud)
 
     running = True
     while running:
@@ -61,42 +38,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        for bull in player.bullets:
-            all_sprites.add(bull)
+        l1.update()
 
-        # Обновление всех спрайтов
-        all_sprites.update()
-        enemys_sprites.update()
-        camera.update(player)
-        cloud_spites.update()
+        l1.render(screen)
 
-        # Проверка коллизий
-        player.check_collision(platforms, Boxes)
-        enemy_collisions = pygame.sprite.spritecollide(player, enemys_sprites, True)
-
-        if enemy_collisions:
-            hp.lose_hp()
-            if hp.hp == 0:
-                reset_game(hp)
-        for obj in Boxes:
-            obj.collide_player(player)
-
-        for sprite in all_sprites:
-            if isinstance(sprite, Bullet) :
-                sprite.check_collision(enemys_sprites, all_sprites)
-
-        # Рендеринг
-        draw_back_gradient(screen, (135, 180, 200), (0, 191, 255))
-        for sprite in all_sprites:
-            screen.blit(sprite.image, camera.apply(sprite))
-        for sprite in enemys_sprites:
-            screen.blit(sprite.image, camera.apply(sprite))
-        for sprite in cloud_spites:
-            screen.blit(sprite.image, camera.apply(sprite))
-
-        hp.draw(screen)
         pygame.display.flip()
-
         clock.tick(const.FPS)
 
     pygame.quit()
