@@ -8,8 +8,9 @@ from player import Player
 from  health import Health
 from camera import Camera
 import const
-from background import Cloud
+from background import Cloud, draw_back_gradient
 from Bullet import Bullet
+
 
 class Level:
     def __init__(self, json_file):
@@ -24,7 +25,7 @@ class Level:
         self.camera = Camera(const.SCREEN_WIDTH, const.SCREEN_HEIGHT)
         self.all_sprites = pygame.sprite.Group()
         self.enemys_sprites = pygame.sprite.Group()
-        self.cloud_spites = []
+        self.cloud_spites = pygame.sprite.Group()
 
         self.create_objects()
 
@@ -94,7 +95,7 @@ class Level:
 
     def render(self, screen):
         # Рендеринг
-        self.draw_back_gradient(screen, (135, 180, 200), (0, 191, 255))
+        draw_back_gradient(screen, (135, 180, 200), (0, 191, 255))
         for sprite in self.all_sprites:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.enemys_sprites:

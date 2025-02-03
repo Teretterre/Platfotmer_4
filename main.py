@@ -38,9 +38,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        l1.update()
-
-        l1.render(screen)
+        if screen_now == 'munu':
+            pass
+        elif screen_now == 'lvl':
+            l1.update()
+            l1.render(screen)
 
         pygame.display.flip()
         clock.tick(const.FPS)
