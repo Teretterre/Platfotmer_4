@@ -11,6 +11,7 @@ from health import Health
 from gameObject import GameObject
 from Bullet import Bullet
 import const
+from menu import Menu
 from background import draw_back_gradient, Cloud
 
 
@@ -22,6 +23,9 @@ pygame.init()
 screen = pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT))
 pygame.display.set_caption("Platformer Game")
 clock = pygame.time.Clock()
+screen_now = 'menu'
+
+
 
 # перезапуск игры
 def reset_game(hp):
@@ -31,15 +35,16 @@ def reset_game(hp):
 # Игровой цикл
 def main():
     l1 = Level('LevelData/lvl_1.json')
-
+    menu = Menu(screen)
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        if screen_now == 'munu':
-            pass
+        if screen_now == 'menu':
+            menu.update()
+            menu.render()
         elif screen_now == 'lvl':
             l1.update()
             l1.render(screen)

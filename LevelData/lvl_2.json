@@ -1,0 +1,57 @@
+{
+  "level" : 1,
+  "level_size" : 1500,
+  "player-start" : {
+    "x" : 500,
+    "y" : 500
+  },
+  "platforms" : [
+    {
+      "x" : 0,
+      "y" : 570,
+      "width" : 3500,
+      "height" : 30
+    },
+    {
+      "x" : 600,
+      "y" : 400,
+      "width" : 150,
+      "height" : 20
+    },
+    {
+      "x" : 900,
+      "y" : 300,
+      "width" : 150,
+      "height" : 20
+    }
+  ],
+  "enemys" : [
+    {
+      "x" : 650,
+      "y" : 530,
+      "move_distance" : 1630,
+      "speed" : 1
+    },
+    {
+      "x" : 800,
+      "y" : 530,
+      "move_distance" : 1630,
+      "speed" : 1
+    },
+    {
+      "x" : 1200,
+      "y" : 530,
+      "move_distance" : 1630,
+      "speed" : 1
+    }
+  ],
+  "objects" : [
+    {
+      "x" : 500,
+      "y" : 500,
+      "width" : 50,
+      "height" : 50,
+      "type" : "box"
+    }
+  ]
+}
