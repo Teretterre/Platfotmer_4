@@ -13,7 +13,7 @@ from Bullet import Bullet
 import const
 from menu import Menu
 from background import draw_back_gradient, Cloud
-
+import os
 
 
 # Инициализация Pygame
@@ -23,7 +23,7 @@ pygame.init()
 screen = pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT))
 pygame.display.set_caption("Platformer Game")
 clock = pygame.time.Clock()
-screen_now = 'menu'
+
 
 
 
@@ -34,20 +34,27 @@ def reset_game(hp):
 
 # Игровой цикл
 def main():
-    l1 = Level('LevelData/lvl_1.json')
-    menu = Menu(screen)
+    level = None
+    screen_now = 'menu'
+    menu = Menu()
     running = True
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
+            if screen_now == 'menu':
+                name_file = menu.update(event)
+                if name_file != None:
+                    screen_now = 'lvl'
+                    level = Level(os.path.join("LevelData/" + str(name_file)))
         if screen_now == 'menu':
-            menu.update()
-            menu.render()
+            menu.render(screen)
         elif screen_now == 'lvl':
-            l1.update()
-            l1.render(screen)
+            level.update()
+            level.render(screen)
+
+
 
         pygame.display.flip()
         clock.tick(const.FPS)

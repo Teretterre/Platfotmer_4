@@ -9,6 +9,8 @@ class Camera:
 
     def update(self, target):
         X = - target.rect.centerx + self.width // 2
+        if X > 0:
+            X = 0
 
         if target.rect.centery < 30:
             Y = - target.rect.centery + self.height // 2

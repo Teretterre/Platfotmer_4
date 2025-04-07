@@ -40,3 +40,4 @@ class GameObject(pygame.sprite.Sprite):
     def update(self):
         self.gravity()
 
+
