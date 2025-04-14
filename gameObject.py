@@ -41,3 +41,12 @@ class GameObject(pygame.sprite.Sprite):
         self.gravity()
 
 
+    def check_collision(self, platforms):
+        # Проверка горизонтальных колизий
+        collisions = pygame.sprite.spritecollide(self, platforms, False)
+        for platform in collisions:
+            if self.velocity_x > 0:
+                self.rect.right = platform.rect.left
+            elif self.velocity_x < 0:
+                self.rect.left = platform.rect.right
+
