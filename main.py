@@ -51,7 +51,9 @@ def main():
         if screen_now == 'menu':
             menu.render(screen)
         elif screen_now == 'lvl':
-            level.update()
+            staus_lvl = level.update()
+            if staus_lvl == 'menu':
+                screen_now = 'menu'
             level.render(screen)
 
 
