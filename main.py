@@ -14,7 +14,7 @@ import const
 from menu import Menu
 from background import draw_back_gradient, Cloud
 import os
-
+from endscreen import EndScreen
 
 # Инициализация Pygame
 pygame.init()
@@ -35,6 +35,7 @@ def reset_game(hp):
 # Игровой цикл
 def main():
     level = None
+    endscreen = None
     screen_now = 'menu'
     menu = Menu()
     running = True
@@ -48,12 +49,20 @@ def main():
                 if name_file != None:
                     screen_now = 'lvl'
                     level = Level(os.path.join("LevelData/" + str(name_file)))
+            elif screen_now == 'endscreen':
+                endscreen_output = endscreen.update(event)
+                if endscreen_output == 'return_menu':
+                    screen_now = 'menu'
+
         if screen_now == 'menu':
             menu.render(screen)
+        if screen_now == 'endscreen':
+            endscreen.render(screen)
         elif screen_now == 'lvl':
             staus_lvl = level.update()
-            if staus_lvl == 'menu':
-                screen_now = 'menu'
+            if staus_lvl == 'lose':
+                screen_now = 'endscreen'
+                endscreen = EndScreen('lose')
             level.render(screen)
 
 

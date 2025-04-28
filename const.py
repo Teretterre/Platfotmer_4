@@ -39,3 +39,5 @@ CLOUD_SPEED_START = 0.5
 CLOUD_SPEED_END = 1.5
 
 NAME = "PLATFORMER"
+WIN = 'Уровень пройден!'
+LOSE = 'Ты проиграл'

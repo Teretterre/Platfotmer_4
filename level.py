@@ -85,7 +85,7 @@ class Level:
         if enemy_collisions:
             self.hp.lose_hp()
             if self.hp.hp == 0:
-                return 'menu'
+                return 'lose'
         for obj in self.objects:
             obj.collide_player(self.player)
 
