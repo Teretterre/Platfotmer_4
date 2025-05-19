@@ -1,6 +1,8 @@
 import pygame
 import json
 import random
+
+from exitPoint import ExitPoint
 from my_platform import Platform
 from enemy import Enemy
 from gameObject import GameObject
@@ -26,6 +28,7 @@ class Level:
         self.all_sprites = pygame.sprite.Group()
         self.enemys_sprites = pygame.sprite.Group()
         self.cloud_spites = pygame.sprite.Group()
+        self.exit_point = None
 
         self.create_objects()
 
@@ -39,6 +42,7 @@ class Level:
         self.level = data["level"]
         self.level_size = data["level_size"]
         self.player = Player(data["player-start"]['x'], data["player-start"]['y'])
+        self.exit_point = ExitPoint(data["exit-point"]['x'], data["exit-point"]['y'])
 
         for plat in data["platforms"]:
             self.platforms.append(Platform(plat["x"], plat["y"], plat["width"], plat["height"]))
@@ -59,6 +63,7 @@ class Level:
 
         self.all_sprites.add(self.player)
 
+
         for ene in self.enemys:
             self.enemys_sprites.add(ene)
 
@@ -77,6 +82,8 @@ class Level:
         self.enemys_sprites.update()
         self.camera.update(self.player)
         self.cloud_spites.update()
+        if self.exit_point.update(self.player):
+            return 'menu'
 
         # Проверка коллизий
         self.player.check_collision(self.platforms, self.objects)
@@ -102,5 +109,5 @@ class Level:
             screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.cloud_spites:
             screen.blit(sprite.image, self.camera.apply(sprite))
-
+        screen.blit(self.exit_point.image, self.camera.apply(self.exit_point))
         self.hp.draw(screen)

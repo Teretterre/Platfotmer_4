@@ -53,6 +53,10 @@ def main():
                 endscreen_output = endscreen.update(event)
                 if endscreen_output == 'return_menu':
                     screen_now = 'menu'
+                    name_file = None
+                elif endscreen_output == 'restart':
+                    screen_now = 'lvl'
+                    level = Level(os.path.join("LevelData/" + str(name_file)))
 
         if screen_now == 'menu':
             menu.render(screen)
@@ -63,6 +67,8 @@ def main():
             if staus_lvl == 'lose':
                 screen_now = 'endscreen'
                 endscreen = EndScreen('lose')
+            elif staus_lvl == 'menu':
+                screen_now = 'menu'
             level.render(screen)
 
 

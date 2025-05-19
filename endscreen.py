@@ -10,10 +10,17 @@ class EndScreen:
         def button_menu_action():
             self.output = 'return_menu'
 
+        def button_restart_action():
+            self.output = 'restart'
+
         self.button_menu = Button(200, 200, 100, 50, 'в меню', 30, const.RED, const.GREEN, const.BLUE, button_menu_action)
+        self.button_restart = Button(500, 200, 100, 50, 'Заново', 30, const.RED, const.GREEN, const.BLUE, button_restart_action)
+
+
 
     def update(self, event):
         self.button_menu.update(event)
+        self.button_restart.update(event)
         return self.output
         #if event.type == pygame.KEYDOWN:
         #    if event.key == pygame.K_UP:
@@ -29,6 +36,7 @@ class EndScreen:
     def render(self, screen):
         screen.fill((0, 0, 0))
         self.button_menu.render(screen)
+        self.button_restart.render(screen)
         if self.status == 'win':
             text = self.font_text.render(const.WIN, True, (255, 255, 255))
         else:
